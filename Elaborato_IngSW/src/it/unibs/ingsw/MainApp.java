@@ -10,15 +10,16 @@ public class MainApp {
 	
 	public static void main(String[] args) {
 		MainApp app = new MainApp();
+		app.initialize();
 	}
 
 	public MainApp() {
 		this.model = new AppModel();
 		this.view = new AppView();
-		initialize();
 	}
 
-	private static void initialize() {
-		
+	private void initialize() {
+		model.start();
+		view.start();
 	}
 }
