@@ -9,6 +9,7 @@ public class AppModel {
 	public void start() {
 		User configuratore = new User();
 		
+		
 	}
 
 	public String getUser() {
