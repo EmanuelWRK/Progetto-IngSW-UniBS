@@ -5,16 +5,20 @@ import it.unibs.ingsw.model.AppModel;
 import it.unibs.ingsw.controller.AppController;
 
 public class MainApp {
-
-	private AppView view;
+	
 	private AppModel model;
+	private AppView view;
 	private AppController controller;
 	
 	public static void main(String[] args) {
+		//Creazione dell'istanza principale dell'applicazione
 		MainApp app = new MainApp();
+		
+		//Avvio del programma
 		app.initialize();
 	}
 
+	//Inizializzazione VMC
 	public MainApp() {
 		this.model = new AppModel();
 		this.view = new AppView();
@@ -22,8 +26,10 @@ public class MainApp {
 	}
 
 	private void initialize() {
-		while(true) {
+		int i = 0;
+		while(i == 0) {
 			controller.start();
+			i++;
 		}
 	}
 }
