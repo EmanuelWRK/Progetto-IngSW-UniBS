@@ -19,6 +19,5 @@ public class AppController {
 	public void start() {
 		Menu menu = MenuFactory.createMenu(MenuType.LOGIN);	
 		menu.printMenu();
-		
 	}
 }
