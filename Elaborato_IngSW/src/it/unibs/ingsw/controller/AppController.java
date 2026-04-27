@@ -2,6 +2,9 @@ package it.unibs.ingsw.controller;
 
 import it.unibs.ingsw.model.AppModel;
 import it.unibs.ingsw.view.AppView;
+import it.unibs.ingsw.view.menu.Menu;
+import it.unibs.ingsw.view.menu.MenuFactory;
+import it.unibs.ingsw.view.menu.MenuType;
 
 public class AppController {
 	AppModel model;
@@ -13,6 +16,7 @@ public class AppController {
 	}
 	
 	public void start() {
-		System.out.println("Ciao");
+		Menu menu = MenuFactory.createMenu(MenuType.LOGIN);	
+		menu.printMenu();
 	}
 }
