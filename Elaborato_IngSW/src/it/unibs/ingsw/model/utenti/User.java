@@ -1,4 +1,4 @@
-package it.unibs.ingsw.model;
+package it.unibs.ingsw.model.utenti;
 
 import java.util.Scanner;
 
