@@ -13,6 +13,6 @@ public class AppController {
 	}
 	
 	public void start() {
-		
+		System.out.println("Ciao");
 	}
 }
