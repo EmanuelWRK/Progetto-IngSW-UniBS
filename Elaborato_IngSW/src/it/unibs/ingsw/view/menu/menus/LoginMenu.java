@@ -12,8 +12,7 @@ public class LoginMenu extends Menu {
 		StringBuffer sb = new StringBuffer();
 		sb.append(DIVIDER);
 		sb.append(NEWLINE);
-		sb.append(TAB);
 		sb.append("LOGIN MENU");
-		sb.toString();
+		System.out.print(sb.toString());
 	}
 }
