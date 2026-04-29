@@ -3,9 +3,12 @@ package it.unibs.ingsw.view.menu;
 import it.unibs.ingsw.view.menu.menus.*;
 
 public class MenuFactory {
-	//Creazione Menu
+	/**
+	 * Metodo che restituisce l'oggetto di tipo Menu
+	 * @param menuType Tipo di menù richiesto
+	 * @return Il tipo di menù richiesto
+	 */
 	public static Menu createMenu(MenuType menuType) {
-		//Scelta tipo di Menu
 		switch(menuType) {
 			case LOGIN:
 				return new LoginMenu();
