@@ -13,6 +13,7 @@ public class LoginMenu extends Menu {
 		sb.append(DIVIDER);
 		sb.append(NEWLINE);
 		sb.append("LOGIN MENU");
+		sb.append(NEWLINE);
 		System.out.print(sb.toString());
 	}
 }

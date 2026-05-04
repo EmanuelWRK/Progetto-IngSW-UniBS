@@ -1,6 +1,6 @@
 package it.unibs.ingsw.model.utenti;
 
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class User {
 	private String username;
@@ -13,14 +13,8 @@ public class User {
 		return username;
 	}
 	
-	public void setUsername() {
-//		Input username
-		try (Scanner input = new Scanner(System.in)) {
-			System.out.println("Inserire username:");
-			String newUsername = input.nextLine();
-			
-			this.username = newUsername;
-		}
+	public void setUsername(String username) {
+			this.username = username;
 	}
 	
 }
