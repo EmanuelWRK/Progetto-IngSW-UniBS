@@ -5,7 +5,6 @@ import it.unibs.ingsw.model.AppModel;
 import it.unibs.ingsw.controller.AppController;
 
 public class MainApp {
-	
 	private static final String ERROR = "Errore rilevato, chiusura applicazione.\n";
 	
 	private AppModel model;
@@ -15,7 +14,6 @@ public class MainApp {
 	public static void main(String[] args) {
 		MainApp app = new MainApp();
 		app.initialize();
-		AppModel.start();
 	}
 
 	/**

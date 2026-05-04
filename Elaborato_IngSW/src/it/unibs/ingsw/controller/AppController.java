@@ -14,5 +14,14 @@ public class AppController {
 	
 	public void start() {
 		view.start();
+		
+	}
+	
+	public String setUsername(){
+		String stringa;
+		do {
+			stringa = AppView.insertUsername();
+		}while(AppModel.riempiFile(stringa));
+		return stringa;
 	}
 }
