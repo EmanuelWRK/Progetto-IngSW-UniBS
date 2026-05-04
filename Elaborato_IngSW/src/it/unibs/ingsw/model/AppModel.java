@@ -22,7 +22,6 @@ public class AppModel {
 		User configuratore = new User(username);
 		
 		
-		
 		switch (scelta) {
 		case 0: {
 //			username = 

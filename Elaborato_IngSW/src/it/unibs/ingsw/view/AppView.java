@@ -7,6 +7,7 @@ import it.unibs.ingsw.view.menu.*;
 public class AppView {
 	private static Scanner userInteraction = new Scanner(System.in);
 	
+	
 	public void start() { 
 		render();
 	}

@@ -19,6 +19,7 @@ public class AppController {
 	
 	public String setUsername(){
 		String stringa;
+		
 		do {
 			stringa = AppView.insertUsername();
 		}while(AppModel.riempiFile(stringa));
