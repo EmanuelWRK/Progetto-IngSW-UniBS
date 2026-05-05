@@ -13,14 +13,19 @@ public class AppController {
 	}
 	
 	public void start() {
-		view.start();
+		view.start();	
+		String username;
+		boolean ok = false;
+		do {
+			username = AppView.insertString();
+			ok = AppModel.riempiFile(username);
+			if(ok) {
+				view.showMessage("Login effettuato");
+			}else {
+				view.showMessage("Username già esistente!"
+						+ "\nInserisci username: ");
+			}
+		}while(!ok);
 	}
 	
-	public String setUsername(){
-		String stringa;
-		do {
-			stringa = AppView.insertUsername();
-		}while(AppModel.riempiFile(stringa));
-		return stringa;
-	}
 }

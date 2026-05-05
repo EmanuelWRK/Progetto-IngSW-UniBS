@@ -9,7 +9,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 public class AppModel {
 	public static boolean riempiFile(String username) {
-		boolean esistente = false;
+		boolean ok = false;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			File file = new File("user.json");
@@ -21,17 +21,15 @@ public class AppModel {
 				users = new ArrayList<>();
 			}
 			if (users.contains(username)) {
-				System.out.println("Username già esistente!");
-				esistente = true;
+				ok = false;
 			} else {
 				users.add(username);
 				mapper.writeValue(file, users);
-				System.out.println("User salvato in JSON!");
-				esistente = false;
+				ok = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return esistente;
+		return ok;
 	}
 }

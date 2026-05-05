@@ -8,29 +8,20 @@ public class AppView {
 	private static Scanner userInteraction = new Scanner(System.in);
 	
 	public void start() { 
-		render();
+		showLoginMenu();
 	}
 	
-	public static String insertUsername() {
+	public static String insertString() {
 		String newUsername;
-		System.out.print("Inserire username: ");
 		newUsername = userInteraction.nextLine();
 	    return newUsername;
 	}
 	
-	public static void primoAccesso() {
-		String username = insertUsername();
-		String password = insertPassword();
+	public void showLoginMenu() {
+		MenuFactory.createMenu(MenuType.LOGIN).printMenu();
 	}
 	
-	private static String insertPassword() {
-		String password;
-		System.out.print("Inserire password: ");
-		password = userInteraction.nextLine();
-	    return password;
-	}
-
-	private void render() {
-		MenuFactory.createMenu(MenuType.LOGIN).printMenu();
+	public void showMessage(String string) {
+		System.out.println(string);
 	}
 }
