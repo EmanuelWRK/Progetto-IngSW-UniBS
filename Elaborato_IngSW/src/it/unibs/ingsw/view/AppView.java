@@ -8,7 +8,8 @@ public class AppView {
 	private static Scanner userInteraction = new Scanner(System.in);
 	
 	public void start() { 
-		showLoginMenu();
+		Menu login = MenuFactory.createMenu(MenuType.LOGIN);
+		showMenu(login);
 	}
 	
 	public static String insertString() {
@@ -17,8 +18,8 @@ public class AppView {
 	    return newUsername;
 	}
 	
-	public void showLoginMenu() {
-		MenuFactory.createMenu(MenuType.LOGIN).printMenu();
+	public void showMenu(Menu menu) {
+		menu.printHeader();
 	}
 	
 	public void showMessage(String string) {

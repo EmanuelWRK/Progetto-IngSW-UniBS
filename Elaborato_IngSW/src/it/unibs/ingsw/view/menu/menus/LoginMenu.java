@@ -10,16 +10,16 @@ public class LoginMenu extends Menu {
 	/**
 	 * Visualizzazione del menù
 	 */
-	public void printMenu() {
+	public void printHeader() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(DIVIDER);
 		sb.append(NEWLINE);
 		sb.append(TAB);
 		sb.append(MENU_TYPE);
 		sb.append(NEWLINE);
+		sb.append(DIVIDER);
+		sb.append(NEWLINE);
 		System.out.print(sb.toString());
-		System.out.println("1. Inserisci username: ");
-		
 	}
 	
 }

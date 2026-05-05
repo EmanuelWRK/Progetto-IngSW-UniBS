@@ -5,5 +5,5 @@ public abstract class Menu {
 	protected static final String DIVIDER = "==========================";
 	protected static final String NEWLINE = "\n";
 	
-	public abstract void printMenu();
+	public abstract void printHeader();
 }
