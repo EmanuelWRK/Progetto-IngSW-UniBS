@@ -1,9 +1,10 @@
 package it.unibs.ingsw.view.menu.menus;
 
 import it.unibs.ingsw.view.menu.Menu;
+//import it.unibs.ingsw.controller.AppController;
+
 
 public class LoginMenu extends Menu {
-	
 	@Override
 	/**
 	 * Visualizzazione del menù
@@ -12,8 +13,12 @@ public class LoginMenu extends Menu {
 		StringBuffer sb = new StringBuffer();
 		sb.append(DIVIDER);
 		sb.append(NEWLINE);
+		sb.append(TAB);
 		sb.append("LOGIN MENU");
 		sb.append(NEWLINE);
 		System.out.print(sb.toString());
 	}
+	
+	
+	
 }
