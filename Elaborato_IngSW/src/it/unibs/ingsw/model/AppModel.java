@@ -11,7 +11,7 @@ import it.unibs.ingsw.model.utenti.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 public class AppModel {
-	public static boolean riempiFileNames(String newUsername) {
+	public boolean riempiFileNames(String newUsername) {
 		boolean ok = false;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -38,7 +38,7 @@ public class AppModel {
 		return ok;
 	}
 	
-	public static boolean riempiFileUsers(User newUser) {
+	public boolean riempiFileUsers(User newUser) {
 		boolean ok = false;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -65,7 +65,7 @@ public class AppModel {
 		return ok;
 	}
 	
-	public static boolean controlloPassword(String passwordInserita, String userDaLoggare) {
+	public boolean controlloPassword(String passwordInserita, String userDaLoggare) {
 		int i = 0;
 		User utente;
 		boolean ok = false;
@@ -92,7 +92,7 @@ public class AppModel {
 		return ok;
 	}
 	
-	public static boolean userEsistente(String username) {
+	public boolean userEsistente(String username) {
 		boolean ok = false;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -114,4 +114,6 @@ public class AppModel {
 		//true se username è in memoria, false se username non esiste
 		return ok;
 	}
+	
+	
 }

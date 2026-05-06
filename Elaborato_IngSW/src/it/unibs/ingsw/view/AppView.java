@@ -12,7 +12,7 @@ public class AppView {
 		showMenu(login);
 	}
 	
-	public static String insertString() {
+	public String insertString() {
 		String newUsername;
 		newUsername = userInteraction.nextLine();
 	    return newUsername;

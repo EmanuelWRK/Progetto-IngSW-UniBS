@@ -21,11 +21,11 @@ public class AppController {
 		
 		do {
 			view.showMessage(ASK_USERNAME);
-			username = AppView.insertString();
+			username = view.insertString();
 			if(username.equals("admin")) {
 				ok = primoAccesso();
 			}
-			if(AppModel.userEsistente(username)) {
+			if(model.userEsistente(username)) {
 				ok = effettuaLogin(username);
 			}
 			
@@ -48,7 +48,7 @@ public class AppController {
 		
 		User newUser = new User(username, password);
 		
-		ok = AppModel.riempiFileUsers(newUser);
+		ok = model.riempiFileUsers(newUser);
 		return ok;
 	}
 	
@@ -57,7 +57,7 @@ public class AppController {
 		boolean ok = false;
 		
 		do {
-			ok = AppModel.riempiFileNames(username);
+			ok = model.riempiFileNames(username);
 			if(!ok) {
 				//Username esiste
 				view.showMessage("Username valido!");
@@ -66,7 +66,7 @@ public class AppController {
 				view.showMessage("Username non presente in memoria!\n");
 				do {
 					view.showMessage(ASK_USERNAME);
-					username = AppView.insertString();
+					username = view.insertString();
 				}while(username.equals("admin"));
 			}
 		}while(ok);
@@ -75,9 +75,9 @@ public class AppController {
 		//Inserimento password
 		do {
 			view.showMessage("Inserisci password: ");
-			password = AppView.insertString();
+			password = view.insertString();
 			
-			ok = AppModel.controlloPassword(password, username);
+			ok = model.controlloPassword(password, username);
 			if(ok) {
 				view.showMessage("Login effettuato!");
 			}else {
@@ -94,8 +94,8 @@ public class AppController {
 		boolean ok = false;
 		do {
 			view.showMessage(ASK_USERNAME);
-			username = AppView.insertString();
-			ok = AppModel.riempiFileNames(username);
+			username = view.insertString();
+			ok = model.riempiFileNames(username);
 			if(ok) {
 				//true se nuovo username
 				view.showMessage("Username valido!");
@@ -112,7 +112,7 @@ public class AppController {
 		boolean ok = false;
 		do {
 			view.showMessage("Inserisci password: ");
-			password = AppView.insertString();
+			password = view.insertString();
 			//Da implementare controllo per non avere password troppo semplice
 		}while(ok);
 		return password;
