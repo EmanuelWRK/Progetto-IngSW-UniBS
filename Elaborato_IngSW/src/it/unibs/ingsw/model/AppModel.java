@@ -38,7 +38,36 @@ public class AppModel {
 		return ok;
 	}
 	
-	public static boolean riempiFileUsers(String username, String password) {
+	public static boolean riempiFileUsers(User newUser) {
+		boolean ok = false;
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			File file = new File("data/userList.json");
+			List<User> users;
+			
+			if (file.exists()) {
+				users = mapper.readValue(file, new TypeReference<List<User>>() {});
+			} else {
+				users = new ArrayList<>();
+			}
+						
+			if (users.contains(newUser)) {
+				ok = false;
+			} else {
+				users.add(newUser);
+				mapper.writeValue(file, users);
+				ok = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//false se username è in memoria, true se username è nuovo
+		return ok;
+	}
+	
+	public static boolean controlloPassword(String passwordInserita, String userDaLoggare) {
+		int i = 0;
+		User utente;
 		boolean ok = false;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -51,27 +80,38 @@ public class AppModel {
 				users = new ArrayList<>();
 			}
 			
-			User newUser = new User(username, password);
+			do {
+				utente = users.get(i);
+				i++;
+			}while(!utente.getUsername().equals(userDaLoggare));
 			
-			if(!riempiFileNames(username)) {
-				if (users.contains(newUser)) {
-					ok = false;
-				} else {
-					users.add(newUser);
-					mapper.writeValue(file, users);
-					ok = true;
-				}
-			}
+			ok = utente.getPassword().equals(passwordInserita);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ok;
 	}
 	
-	
-	public boolean controlloPassword(String passwordInserita, String passwordSalvata) {
-		
-		return true;
+	public static boolean userEsistente(String username) {
+		boolean ok = false;
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			File file = new File("data/usernameList.json");
+			List<String> usernames;
+			
+			if (file.exists()) {
+				usernames = mapper.readValue(file, new TypeReference<List<String>>() {});
+			} else {
+				usernames = new ArrayList<>();
+			}
+			
+			if (usernames.contains(username)) {
+				ok = true;
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//true se username è in memoria, false se username non esiste
+		return ok;
 	}
-	
 }

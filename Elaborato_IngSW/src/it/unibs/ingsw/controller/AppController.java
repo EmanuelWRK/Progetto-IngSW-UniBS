@@ -1,6 +1,7 @@
 package it.unibs.ingsw.controller;
 
 import it.unibs.ingsw.model.AppModel;
+import it.unibs.ingsw.model.utenti.User;
 import it.unibs.ingsw.view.AppView;
 
 public class AppController {
@@ -16,55 +17,76 @@ public class AppController {
 	public void start() {
 		view.start();
 		String username;
-		String password;
 		boolean ok = false;
 		
-		view.showMessage(ASK_USERNAME);
-		username = AppView.insertString();
-		
-		if(username == "admin") {
-			primoAccesso();
-		}else {
-			//Effettivo login
-			do {
-				ok = AppModel.riempiFileNames(username);
-				if(!ok) {
-					//Username esiste
-//					view.showMessage("Username valido!");
-				}else {
-					//Username non esiste
-					view.showMessage("Username non presente in memoria!\n");
-					do {
-						username = AppView.insertString();
-					}while(username == "admin");
-				}
-			}while(ok);
-			ok = false;
+		do {
+			view.showMessage(ASK_USERNAME);
+			username = AppView.insertString();
+			if(username.equals("admin")) {
+				ok = primoAccesso();
+			}
+			if(AppModel.userEsistente(username)) {
+				ok = effettuaLogin(username);
+			}
 			
-			//Inserimento password
-			do {
-				view.showMessage("Inserisci password: ");
-				password = AppView.insertString();
-				ok = AppModel.riempiFileUsers(username, password);
-				if(ok) {
-					
-				}else {
-					view.showMessage("Password errata!\n");
-				}
-			}while(!ok);
-		}
+			if(ok == true) {
+				view.showMessage("Login effettuato!");
+			} else {
+				view.showMessage("Login fallito!");
+			}
+		}while(!ok);
 	}
 	
 	//Se user ha credenziali predefinite, si creano credenziali personali
-	private void primoAccesso() {
+	private boolean primoAccesso() {
 		view.showMessage("Primo accesso!\nCreazione nuove credenziali!");
-		
+		boolean ok = false;
 		//Setup username
 		String username = setUsername();
 		//Setup password
 		String password = setPassword(username);
 		
-		AppModel.riempiFileUsers(username, password);
+		User newUser = new User(username, password);
+		
+		ok = AppModel.riempiFileUsers(newUser);
+		return ok;
+	}
+	
+	private boolean effettuaLogin(String username) {
+		String password;
+		boolean ok = false;
+		
+		do {
+			ok = AppModel.riempiFileNames(username);
+			if(!ok) {
+				//Username esiste
+				view.showMessage("Username valido!");
+			}else {
+				//Username non esiste
+				view.showMessage("Username non presente in memoria!\n");
+				do {
+					view.showMessage(ASK_USERNAME);
+					username = AppView.insertString();
+				}while(username.equals("admin"));
+			}
+		}while(ok);
+		ok = false;
+		
+		//Inserimento password
+		do {
+			view.showMessage("Inserisci password: ");
+			password = AppView.insertString();
+			
+			ok = AppModel.controlloPassword(password, username);
+			if(ok) {
+				view.showMessage("Login effettuato!");
+			}else {
+				view.showMessage("Password errata!\n");
+			}
+		}while(!ok);
+		
+		System.out.println(ok);
+		return ok;
 	}
 	
 	private String setUsername() {
@@ -92,7 +114,7 @@ public class AppController {
 			view.showMessage("Inserisci password: ");
 			password = AppView.insertString();
 			//Da implementare controllo per non avere password troppo semplice
-		}while(!ok);
+		}while(ok);
 		return password;
 	}
 }
