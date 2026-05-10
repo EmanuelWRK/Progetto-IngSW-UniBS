@@ -6,4 +6,5 @@ public abstract class Menu {
 	protected static final String NEWLINE = "\n";
 	
 	public abstract void printHeader();
+	public abstract void printOptions();
 }

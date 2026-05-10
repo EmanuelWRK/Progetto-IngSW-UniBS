@@ -12,7 +12,8 @@ public class MenuFactory {
 		switch(menuType) {
 			case LOGIN:
 				return new LoginMenu();
-			
+			case AUTH:
+				return new AuthMenu();
 			default: throw new IllegalArgumentException();
 		}
 	}

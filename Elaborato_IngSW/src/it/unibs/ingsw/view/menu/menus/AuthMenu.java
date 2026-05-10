@@ -3,14 +3,12 @@ package it.unibs.ingsw.view.menu.menus;
 import it.unibs.ingsw.view.menu.Menu;
 import it.unibs.ingsw.view.menu.MenuType;
 
+public class AuthMenu extends Menu {
 
-public class LoginMenu extends Menu {
-	private static final MenuType menuType = MenuType.LOGIN;
+	private static final MenuType menuType = MenuType.AUTH;
+	
 	
 	@Override
-	/**
-	 * Visualizzazione del menù
-	 */
 	public void printHeader() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(DIVIDER);
@@ -28,5 +26,5 @@ public class LoginMenu extends Menu {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 }
