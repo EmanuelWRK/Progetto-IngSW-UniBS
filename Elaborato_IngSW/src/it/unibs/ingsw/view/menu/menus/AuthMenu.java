@@ -6,6 +6,7 @@ import it.unibs.ingsw.view.menu.MenuType;
 public class AuthMenu extends Menu {
 
 	private static final MenuType menuType = MenuType.AUTH;
+	private static final String[] options = {"Login", "Registrati"};
 	
 	
 	@Override
@@ -23,8 +24,20 @@ public class AuthMenu extends Menu {
 
 	@Override
 	public void printOptions() {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < options.length; i++) {
+			System.out.println((i + 1) + " " + options[i]);
+		}
 		
+	}
+
+	@Override
+	public void chooseOption(int option) {
+		return;
+	}
+
+	@Override
+	public MenuType getMenutype() {
+		return menuType;
 	}
 
 }

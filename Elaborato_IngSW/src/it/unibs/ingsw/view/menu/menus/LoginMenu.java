@@ -28,5 +28,17 @@ public class LoginMenu extends Menu {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void chooseOption(int option) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public MenuType getMenutype() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

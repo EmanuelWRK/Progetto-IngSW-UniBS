@@ -10,11 +10,21 @@ public class AppView {
 	
 	public void start() { 
 		setCurrentMenu(MenuType.AUTH);
-		showMenu();
+		render();
 	}
 	
-	public void showMenu() {
-		currentMenu.printHeader();;
+	public void render() {
+		currentMenu.printHeader();
+		
+		/**
+		 * Differenziazione tra i vari menu
+		 */
+		switch(currentMenu.getMenutype()){
+			case MenuType.AUTH:
+				currentMenu.printOptions();
+		default:
+			break;
+		}
 	}
 	
 	public void showMessage(String string) {
@@ -29,5 +39,9 @@ public class AppView {
 		String newUsername;
 		newUsername = userInteraction.nextLine();
 	    return newUsername;
+	}
+	
+	public int getUserMenuChoice() {
+		return userInteraction.nextInt();
 	}
 }
