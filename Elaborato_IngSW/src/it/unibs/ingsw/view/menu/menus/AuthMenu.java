@@ -7,7 +7,6 @@ public class AuthMenu extends Menu {
 	private static final MenuType menuType = MenuType.AUTH;
 	private static final String[] options = {"Login", "Signup"};
 	
-	
 	@Override
 	public void printHeader() {
 		StringBuffer sb = new StringBuffer();

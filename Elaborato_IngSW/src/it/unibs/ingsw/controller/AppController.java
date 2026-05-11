@@ -1,10 +1,11 @@
 package it.unibs.ingsw.controller;
 
 import it.unibs.ingsw.model.AppModel;
-import it.unibs.ingsw.model.utenti.User;
 import it.unibs.ingsw.view.AppView;
+import it.unibs.ingsw.view.menu.MenuType;
+import it.unibs.ingsw.model.utenti.User;
 
-public class AppController {
+public class AppController implements ViewListener{
 	private static final String ASK_USERNAME = "Inserisci username: ";
 	AppModel model;
 	AppView view;
@@ -12,30 +13,29 @@ public class AppController {
 	public AppController(AppModel model, AppView view) {
 		this.model = model;
 		this.view = view;
+		view.setListener(this);
 	}
 	
 	public void start() {
 		view.start();
-		String username;
-		boolean ok = false;
-		
-		
-		do {
-			view.showMessage(ASK_USERNAME);
-			username = view.insertString();
-			if(username.equals("admin")) {
-				ok = primoAccesso();
-			}
-			if(model.userEsistente(username)) {
-				ok = effettuaLogin(username);
-			}
-			
-			if(ok == true) {
-				view.showMessage("Login effettuato!");
-			} else {
-				view.showMessage("Login fallito!");
-			}
-		}while(!ok);
+		view.setCurrentMenu(MenuType.AUTH);
+	}
+
+	@Override
+	public void onEvent(MenuType type) {
+        switch(type) {
+        case LOGIN:
+            primoAccesso();
+            break;
+        case SIGNUP:
+            effettuaLogin();
+            break;
+        case EXIT:
+            System.exit(0);
+            break;
+		default:
+			break;
+        }
 	}
 	
 	//Se user ha credenziali predefinite, si creano credenziali personali
@@ -53,8 +53,9 @@ public class AppController {
 		return ok;
 	}
 	
-	private boolean effettuaLogin(String username) {
+	private boolean effettuaLogin() {
 		String password;
+		String username = "";
 		boolean ok = false;
 		
 		do {
@@ -67,7 +68,7 @@ public class AppController {
 				view.showMessage("Username non presente in memoria!\n");
 				do {
 					view.showMessage(ASK_USERNAME);
-					username = view.insertString();
+					username = view.insertString("");
 				}while(username.equals("admin"));
 			}
 		}while(ok);
@@ -76,7 +77,7 @@ public class AppController {
 		//Inserimento password
 		do {
 			view.showMessage("Inserisci password: ");
-			password = view.insertString();
+			password = view.insertString("");
 			
 			ok = model.controlloPassword(password, username);
 			if(ok) {
@@ -95,7 +96,7 @@ public class AppController {
 		boolean ok = false;
 		do {
 			view.showMessage(ASK_USERNAME);
-			username = view.insertString();
+			username = view.insertString("");
 			ok = model.riempiFileNames(username);
 			if(ok) {
 				//true se nuovo username
@@ -113,7 +114,7 @@ public class AppController {
 		boolean ok = false;
 		do {
 			view.showMessage("Inserisci password: ");
-			password = view.insertString();
+			password = view.insertString("");
 			//Da implementare controllo per non avere password troppo semplice
 		}while(ok);
 		return password;
