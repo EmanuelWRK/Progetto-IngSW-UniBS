@@ -4,9 +4,8 @@ import it.unibs.ingsw.view.menu.Menu;
 import it.unibs.ingsw.view.menu.MenuType;
 
 public class AuthMenu extends Menu {
-
 	private static final MenuType menuType = MenuType.AUTH;
-	private static final String[] options = {"Login", "Registrati"};
+	private static final String[] options = {"Login", "Signup"};
 	
 	
 	@Override
@@ -25,13 +24,13 @@ public class AuthMenu extends Menu {
 	@Override
 	public void printOptions() {
 		for(int i = 0; i < options.length; i++) {
-			System.out.println((i + 1) + " " + options[i]);
+			System.out.println((i + 1) + ": " + options[i]);
 		}
 	}
 
 	@Override
 	public void chooseOption(int option) {
-		return;
+		
 	}
 
 	@Override

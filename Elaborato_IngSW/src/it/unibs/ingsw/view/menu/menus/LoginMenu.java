@@ -37,8 +37,7 @@ public class LoginMenu extends Menu {
 
 	@Override
 	public MenuType getMenutype() {
-		// TODO Auto-generated method stub
-		return null;
+		return menuType;
 	}
 	
 }

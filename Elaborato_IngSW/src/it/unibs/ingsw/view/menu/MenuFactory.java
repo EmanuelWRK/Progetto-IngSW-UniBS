@@ -14,6 +14,8 @@ public class MenuFactory {
 				return new LoginMenu();
 			case AUTH:
 				return new AuthMenu();
+			case SIGNUP:
+				return new SignupMenu();
 			default: throw new IllegalArgumentException();
 		}
 	}

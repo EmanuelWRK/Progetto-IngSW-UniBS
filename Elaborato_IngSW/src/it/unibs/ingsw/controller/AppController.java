@@ -19,6 +19,7 @@ public class AppController {
 		String username;
 		boolean ok = false;
 		
+		
 		do {
 			view.showMessage(ASK_USERNAME);
 			username = view.insertString();

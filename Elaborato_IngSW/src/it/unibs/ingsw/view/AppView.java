@@ -31,7 +31,7 @@ public class AppView {
 		System.out.println(string);
 	}
 	
-	private void setCurrentMenu(MenuType menuType) {
+	public void setCurrentMenu(MenuType menuType) {
 		this.currentMenu = MenuFactory.createMenu(menuType);
 	}
 	
