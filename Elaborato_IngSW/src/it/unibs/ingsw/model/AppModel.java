@@ -11,6 +11,7 @@ import it.unibs.ingsw.model.utenti.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 public class AppModel {
+	
 	public boolean riempiFileNames(String newUsername) {
 		boolean ok = false;
 		try {
@@ -103,6 +104,7 @@ public class AppModel {
 				usernames = mapper.readValue(file, new TypeReference<List<String>>() {});
 			} else {
 				usernames = new ArrayList<>();
+				
 			}
 			
 			if (usernames.contains(username)) {
