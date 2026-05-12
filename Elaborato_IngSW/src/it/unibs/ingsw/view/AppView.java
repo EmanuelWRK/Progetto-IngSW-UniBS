@@ -20,7 +20,6 @@ public class AppView {
         newMenu.printOptions();
         
         int scelta = insertInt("Scegli un'opzione: ");
-
         switch(scelta) {
         case 1:
             listener.onEvent(MenuType.LOGIN);
@@ -28,7 +27,6 @@ public class AppView {
         case 2:
             listener.onEvent(MenuType.SIGNUP);
             break;
-
         case 0:
             listener.onEvent(MenuType.EXIT);
             break;
@@ -56,6 +54,7 @@ public class AppView {
 	
 	public int insertInt(String domanda) {
 		showMessage(domanda);
+		
 		int value = Integer.parseInt(userInteraction.nextLine());
 
 	    return value;
@@ -71,7 +70,7 @@ public class AppView {
 				currentMenu.printOptions();
 				break;
 			case MenuType.LOGIN:
-				String username = insertString("Inserire username");
+//				String username = insertString("Inserire username");
 				break;
 		default:
 			break;

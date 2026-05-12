@@ -6,7 +6,13 @@ import it.unibs.ingsw.view.menu.MenuType;
 import it.unibs.ingsw.model.utenti.User;
 
 public class AppController implements ViewListener{
+	private static final String USERNAME_ESISTENTE = "Username già esistente";
+	private static final String PASSWORD_ERRATA = "Password errata";
+	private static final String LOGIN_EFFETTUATO = "Login effettuato";
+	private static final String USERNAME_INESISTENTE = "Username inesistente!";
+	private static final String ASK_PASSWORD = "Inserisci password: ";
 	private static final String ASK_USERNAME = "Inserisci username: ";
+	
 	AppModel model;
 	AppView view;
 	
@@ -17,107 +23,83 @@ public class AppController implements ViewListener{
 	}
 	
 	public void start() {
-		view.start();
-		view.setCurrentMenu(MenuType.AUTH);
+		view.showAuthMenu();
+//		view.start();
+//		view.setCurrentMenu(MenuType.AUTH);
 	}
 
 	@Override
 	public void onEvent(MenuType type) {
         switch(type) {
         case LOGIN:
-            primoAccesso();
+            login();//portarlo in Model?
             break;
         case SIGNUP:
-            effettuaLogin();
+            signup();//portarlo in Model?
             break;
         case EXIT:
-            System.exit(0);
+//            System.exit(0);
             break;
 		default:
 			break;
         }
 	}
 	
-	//Se user ha credenziali predefinite, si creano credenziali personali
-	private boolean primoAccesso() {
-		view.showMessage("Primo accesso!\nCreazione nuove credenziali!");
-		boolean ok = false;
-		//Setup username
-		String username = setUsername();
-		//Setup password
-		String password = setPassword(username);
+	private void login() {
+		boolean valido = false;
+		String username;
+		String password; 
+		do {
+			username = setUsername();
+			if(model.userExists(username)) {
+				valido = true;
+			} else {
+				view.showMessage(USERNAME_INESISTENTE);
+			}
+		}while(!valido);
+		
+		valido = false;
+		do {
+			password = setPassword();
+			if(model.controlloPassword(username, password)) {
+				valido = true;
+				view.showMessage(LOGIN_EFFETTUATO);
+			} else {
+				view.showMessage(PASSWORD_ERRATA);
+			}
+		}while(!valido);
+	}
+
+	private void signup() {
+		String username;
+		boolean exists;
+		do {
+		    username = setUsername();
+		    exists = model.userExists(username);
+		    if(exists) {
+		        view.showMessage(USERNAME_ESISTENTE);
+		    }
+		} while(exists);String password = setPassword();
 		
 		User newUser = new User(username, password);
-		
-		ok = model.riempiFileUsers(newUser);
-		return ok;
-	}
-	
-	private boolean effettuaLogin() {
-		String password;
-		String username = "";
-		boolean ok = false;
-		
-		do {
-			ok = model.riempiFileNames(username);
-			if(!ok) {
-				//Username esiste
-				view.showMessage("Username valido!");
-			}else {
-				//Username non esiste
-				view.showMessage("Username non presente in memoria!\n");
-				do {
-					view.showMessage(ASK_USERNAME);
-					username = view.insertString("");
-				}while(username.equals("admin"));
-			}
-		}while(ok);
-		ok = false;
-		
-		//Inserimento password
-		do {
-			view.showMessage("Inserisci password: ");
-			password = view.insertString("");
-			
-			ok = model.controlloPassword(password, username);
-			if(ok) {
-				view.showMessage("Login effettuato!");
-			}else {
-				view.showMessage("Password errata!\n");
-			}
-		}while(!ok);
-		
-		
-		System.out.println(ok);
-		return ok;
+		model.addUser(newUser);
 	}
 	
 	private String setUsername() {
-		String username;
-		boolean ok = false;
-		do {
-			view.showMessage(ASK_USERNAME);
-			username = view.insertString("");
-			ok = model.riempiFileNames(username);
-			if(ok) {
-				//true se nuovo username
-				view.showMessage("Username valido!");
-			}else {
-				//false se username esistente
-				view.showMessage("Username già esistente!\n");
-			}
-		}while(!ok);
-		return username;
+		String username = view.insertString(ASK_USERNAME);
+	    return username;
 	}
 	
-	private String setPassword(String username) {
+	//Da implementare controllo per non avere password troppo semplice	
+	private String setPassword() {
 		String password;
-		boolean ok = false;
-		do {
-			view.showMessage("Inserisci password: ");
-			password = view.insertString("");
-			//Da implementare controllo per non avere password troppo semplice
-		}while(ok);
+//		boolean valida;
+//		do {
+			password = view.insertString(ASK_PASSWORD);
+//			if(password.length() < 12)
+//				valida = false;
+//			else valida = true;
+//		}while(!valida);
 		return password;
 	}
 }
