@@ -8,6 +8,8 @@ import it.unibs.ingsw.model.utenti.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 public class AppModel {
+	private List<User> users = loadUsers();
+	
 	private List<User> loadUsers() {
 	    try {
 	        ObjectMapper mapper = new ObjectMapper();
@@ -21,17 +23,16 @@ public class AppModel {
 	    return new ArrayList<>();
 	}
 	
-	private void saveUsers(List<User> userList) {
+	private void saveUsers() {
 	    try {
-	    	//Aggiungere la creazione della cartella data?
-//			File directory = new File("data");
-//			if(!directory.exists()) {
-//				directory.mkdir();
-//			}
+			File directory = new File("data");
+			if(!directory.exists()) {
+				directory.mkdir();
+			}
 			
 	        ObjectMapper mapper = new ObjectMapper();
 	        File file = new File("data/userList.json");
-	        mapper.writeValue(file, userList);
+	        mapper.writeValue(file, users);
 	        //Usare writerWithDefaultPrettyPrinter()?
 	    } catch(Exception e) {
 	        e.printStackTrace();
@@ -39,17 +40,15 @@ public class AppModel {
 	}
 	
 	public boolean addUser(User newUser) {
-	    List<User> users = loadUsers();
 	    if(userExists(newUser.getUsername())) {
 	        return false;
 	    }
 	    users.add(newUser);
-	    saveUsers(users);
+	    saveUsers();
 	    return true;
 	}
 	
 	public boolean userExists(String username) {
-		List<User> users = loadUsers();
 		for(User u : users) {
 			if(u.getUsername().equals(username)) {
 				return true;
@@ -59,7 +58,6 @@ public class AppModel {
 	}
 	
 	public User getUser(String username) {
-		List<User> users = loadUsers();
 		for(User u : users) {
 			if(u.getUsername().equals(username)) {
 				return u;
